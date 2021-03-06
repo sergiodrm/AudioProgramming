@@ -10,6 +10,7 @@ class CAudioSource
 public:
 
   CAudioSource(CAudioBuffer* _audioBuffer);
+  ~CAudioSource();
 
 public:
 
@@ -26,7 +27,7 @@ public:
 
 private:
 
-  CAudioBuffer* m_audioBuffer;
+  bool m_bPlaying;
   uint32_t m_audioSourceBuffer;
 };
 
