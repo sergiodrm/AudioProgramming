@@ -8,18 +8,22 @@ private:
 
   struct SWavHeader
   {
-    char chunkID[4]; //"RIFF" = 0x46464952
-    unsigned long chunkSize; //28 [+ sizeof(wExtraFormatBytes) + wExtraFormatBytes] + sum(sizeof(chunk.id) + sizeof(chunk.size) + chunk.size)
-    char format[4]; //"WAVE" = 0x45564157
-    char subchunk1ID[4]; //"fmt " = 0x20746D66
-    unsigned long subchunk1Size; //16 [+ sizeof(wExtraFormatBytes) + wExtraFormatBytes]
-    unsigned short audioFormat;
-    unsigned short numChannels;
-    unsigned long sampleRate;
-    unsigned long byteRate;
-    unsigned short blockAlign;
-    unsigned short bitsPerSample;
+    uint32_t chunkID; 
+    uint32_t riffChunkSize;
+    uint32_t format; 
+    uint32_t fmtSubchunkID;
+    uint32_t fmtChunkSize;
+    uint16_t audioFormat;
+    uint16_t numChannels;
+    uint32_t sampleRate;
+    uint32_t byteRate;
+    uint16_t blockAlign;
+    uint16_t bitsPerSample;
   };
+
+private:
+
+  CAudioBuffer();
 
 public:
 
@@ -27,6 +31,15 @@ public:
   static void Destroy(CAudioBuffer* _buffer);
 
   uint32_t GetALBuffer() const;
+
+
+
+
+///  Properties
+
+private:
+
+  uint32_t m_alBuffer;
 
 };
 

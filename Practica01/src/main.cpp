@@ -42,9 +42,10 @@ int main()
     CRenderEngine::GetInstance().Update();
   }
 
-  // Shutdown
+  // Terminate data
   gameScene.Shutdown();
 
+  // Shutdown
   CWorld::Shutdown();
   CTimeManager::Shutdown();
   CPhysicsEngine::Shutdown();

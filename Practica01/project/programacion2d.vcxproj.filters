@@ -115,7 +115,10 @@
     <ClCompile Include="..\src\AudioManager.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AudioBuffer.cpp" />
+    <ClCompile Include="..\src\AudioBuffer.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioSource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
@@ -217,6 +220,15 @@
     <ClInclude Include="..\src\AudioManager.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AudioBuffer.h" />
+    <ClInclude Include="..\lib\pugixml.hpp">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\pugiconfig.hpp">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioBuffer.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioSource.h" />
   </ItemGroup>
 </Project>
