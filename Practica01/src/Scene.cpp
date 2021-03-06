@@ -34,7 +34,7 @@ CScene::CScene() {}
 
 void CScene::Init()
 {
-  m_audioBuffer = CAudioBuffer::Load(AUDIO_GAME_OVER);
+  m_audioBuffer = CAudioBuffer::Load(AUDIO_TAKE_ON_ME);
   ensure(m_audioBuffer);
   m_audioSource = new CAudioSource(m_audioBuffer);
   ensure(m_audioSource);
