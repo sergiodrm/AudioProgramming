@@ -35,3 +35,16 @@ bool CAudioSource::IsPlaying() const
   alGetSourcei(m_audioSourceBuffer, AL_PLAYING, &playing);
   return playing == AL_TRUE;
 }
+
+
+
+/// ----
+
+void SSourceData::SetAudioSourceSettings(CAudioSource& _source, const SSourceData& _data)
+{
+  _source.SetPitch(_data.m_pitch);
+  _source.SetGain(_data.m_gain);
+  _source.SetLooping(_data.m_loop);
+  _source.SetPosition(_data.m_position[0], _data.m_position[1], _data.m_position[2]);
+  _source.SetVelocity(_data.m_velocity[0], _data.m_velocity[1], _data.m_velocity[2]);
+}

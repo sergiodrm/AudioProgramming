@@ -1,7 +1,10 @@
 #pragma once
 
+#include "AudioSource.h"
 #include "World.h"
 #include "InputCodes.h"
+
+class CAudioBuffer;
 
 class CScene
 {
@@ -16,6 +19,8 @@ public:
 
 private:
 
-  CGameObject* m_playerGameObject;
+  CAudioSource* m_audioSource;
+  CAudioBuffer* m_audioBuffer;
+  SSourceData m_sourceData;
 };
 
