@@ -9,6 +9,18 @@
 
 #define CHUNK_SIZE_FLAG 16
 
+#define al_call(_CALL) \
+  { \
+    alGetError(); \
+    (_CALL); \
+    ALenum alError = alGetError(); \
+    if (alError != AL_NO_ERROR) \
+    { \
+      PRINT_ERROR("Error at OpenAL function %s (code: %d)", #_CALL, alError); \
+      __debugbreak(); \
+    } \
+  } \
+
 CAudioBuffer::CAudioBuffer()
   : m_alBuffer(0) {}
 
@@ -19,12 +31,13 @@ CAudioBuffer* CAudioBuffer::Load(const char* _filename)
   /// Read file ---
 
   // Open file
-  FILE* fid = fopen(_filename, "r");
+  FILE* fid = fopen(_filename, "rb");
   if (!fid)
   {
     PRINT_WARNING("File not found or invalid file");
     return nullptr;
   }
+  PRINT_LOG("Reading %s file...", _filename);
 
   // Read header wav file
   SWavHeader header;
@@ -33,8 +46,6 @@ CAudioBuffer* CAudioBuffer::Load(const char* _filename)
   if (bytesRead != sizeof(SWavHeader))
   {
     PRINT_WARNING("Wav header was not successfully read.");
-    // @todo Remove debug 
-    __debugbreak();
     return nullptr;
   }
 
@@ -92,25 +103,27 @@ CAudioBuffer* CAudioBuffer::Load(const char* _filename)
   } while(!bDataStringFoundFlag);
 
   ensure(dataField);
+  PRINT_LOG("%s file contains %d bytes of data.", _filename, bytesRead);
 
   /// ---
 
   // Generate audio buffer in OpenAL
   CAudioBuffer* audioBuffer = new CAudioBuffer();
-  alGenBuffers(1, &audioBuffer->m_alBuffer);
+  al_call(alGenBuffers(1, &audioBuffer->m_alBuffer));
 
   // Fill buffer
   if (header.bitsPerSample == 8)
   {
-    alBufferData(audioBuffer->m_alBuffer, header.numChannels == 1 ? AL_FORMAT_MONO8 : AL_FORMAT_STEREO8, dataField, static_cast<int>(*dataString), header.sampleRate);
+    al_call(alBufferData(audioBuffer->m_alBuffer, header.numChannels == 1 ? AL_FORMAT_MONO8 : AL_FORMAT_STEREO8, dataField, bytesRead, header.sampleRate));
   }
   else if (header.bitsPerSample == 16)
   {
-    alBufferData(audioBuffer->m_alBuffer, header.numChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, dataField, static_cast<int>(*dataString), header.sampleRate);
+    al_call(alBufferData(audioBuffer->m_alBuffer, header.numChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, dataField, bytesRead, header.sampleRate));
   }
 
   delete[] dataField;
-  
+
+  PRINT_LOG("%s file loaded successfully. (AL buffer id: %d)", _filename, audioBuffer->m_alBuffer);
   return audioBuffer;
 }
 
@@ -118,7 +131,7 @@ void CAudioBuffer::Destroy(CAudioBuffer* _buffer)
 {
   if (_buffer)
   {
-    alDeleteBuffers(1, &_buffer->m_alBuffer);
+    al_call(alDeleteBuffers(1, &_buffer->m_alBuffer));
     delete _buffer;
   }
 }

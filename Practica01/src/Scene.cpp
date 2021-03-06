@@ -49,6 +49,7 @@ void CScene::Init()
   SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
 
   CAudioListener::Init();
+  m_audioSource->Play();
 
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);
@@ -63,20 +64,23 @@ void CScene::Shutdown()
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)
 {
-  switch (_key)
+  if (_action == SInputCode::Press)
   {
-  case SInputCode::Up:
-    m_sourceData.m_pitch += DELTA_PITCH;
-    break;
-  case SInputCode::Down:
-    m_sourceData.m_pitch -= DELTA_PITCH;
-    break;
-  case SInputCode::Left:
-    m_sourceData.m_position[1] += DELTA_POSITION;
-    break;
-  case SInputCode::Right:
-    m_sourceData.m_position[1] -= DELTA_POSITION;
-    break;
+    switch (_key)
+    {
+    case SInputCode::Up:
+      m_sourceData.m_pitch += DELTA_PITCH;
+      break;
+    case SInputCode::Down:
+      m_sourceData.m_pitch -= DELTA_PITCH;
+      break;
+    case SInputCode::Left:
+      m_sourceData.m_position[1] += DELTA_POSITION;
+      break;
+    case SInputCode::Right:
+      m_sourceData.m_position[1] -= DELTA_POSITION;
+      break;
+    }
+    SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
   }
-  SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
 }

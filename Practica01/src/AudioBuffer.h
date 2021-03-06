@@ -33,8 +33,6 @@ public:
   uint32_t GetALBuffer() const;
 
 
-
-
 ///  Properties
 
 private:
