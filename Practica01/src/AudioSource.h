@@ -27,7 +27,6 @@ public:
 
 private:
 
-  bool m_bPlaying;
   uint32_t m_audioSourceBuffer;
 };
 

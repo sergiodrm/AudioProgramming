@@ -25,22 +25,13 @@ void CAudioSource::SetLooping(bool _loop)                     { alSourcei(m_audi
 void CAudioSource::SetPosition(float _x, float _y, float _z)  { alSource3f(m_audioSourceBuffer, AL_POSITION, _x, _y, _z); }
 void CAudioSource::SetVelocity(float _x, float _y, float _z)  { alSource3f(m_audioSourceBuffer, AL_VELOCITY, _x, _y, _z); }
 
-void CAudioSource::Play()
-{
-  alSourcePlay(m_audioSourceBuffer);
-  m_bPlaying = true;
-}
+void CAudioSource::Play()   { alSourcePlay(m_audioSourceBuffer); }
+void CAudioSource::Stop()   { alSourceStop(m_audioSourceBuffer); }
+void CAudioSource::Pause()  { alSourcePause(m_audioSourceBuffer); }
 
-void CAudioSource::Stop()
+bool CAudioSource::IsPlaying() const
 {
-  alSourceStop(m_audioSourceBuffer);
-  m_bPlaying = false;
+  ALint playing;
+  alGetSourcei(m_audioSourceBuffer, AL_PLAYING, &playing);
+  return playing == AL_TRUE;
 }
-
-void CAudioSource::Pause()
-{
-  alSourcePause(m_audioSourceBuffer);
-  m_bPlaying = false;
-}
-
-bool CAudioSource::IsPlaying() const { return m_bPlaying; }

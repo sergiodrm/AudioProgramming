@@ -33,6 +33,7 @@ void CAudioManager::Init_Internal()
 void CAudioManager::Shutdown_Internal()
 {
   // Destroy context and device
+  alcMakeContextCurrent(nullptr);
   alcDestroyContext(m_context);
   alcCloseDevice(m_device);
 }

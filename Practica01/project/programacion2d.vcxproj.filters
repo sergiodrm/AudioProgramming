@@ -118,7 +118,10 @@
     <ClCompile Include="..\src\AudioBuffer.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AudioSource.cpp" />
+    <ClCompile Include="..\src\AudioSource.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
@@ -229,6 +232,9 @@
     <ClInclude Include="..\src\AudioBuffer.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AudioSource.h" />
+    <ClInclude Include="..\src\AudioSource.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioListener.h" />
   </ItemGroup>
 </Project>
