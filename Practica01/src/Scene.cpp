@@ -32,7 +32,7 @@ CScene::CScene() {}
 
 void CScene::Init()
 {
-  m_audioBuffer = CAudioBuffer::Load(AUDIO_FILE);
+  m_audioBuffer = CAudioBuffer::Load(AUDIO_MUSIC);
   ensure(m_audioBuffer);
   m_audioSource = new CAudioSource(m_audioBuffer);
   ensure(m_audioSource);

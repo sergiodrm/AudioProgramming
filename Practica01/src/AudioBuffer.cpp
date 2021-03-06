@@ -15,11 +15,6 @@ CAudioBuffer::CAudioBuffer()
 CAudioBuffer* CAudioBuffer::Load(const char* _filename)
 {
   ensure(_filename);
-  auto stringcmp_lambda = [](const char* _str1, const char* _str2) -> bool
-  {
-    for (; *_str1 && *_str1 == *_str2; ++_str2) ++_str1;
-    return *_str1 - *_str2;
-  };
 
   /// Read file ---
 
@@ -47,15 +42,18 @@ CAudioBuffer* CAudioBuffer::Load(const char* _filename)
   if (header.fmtChunkSize > CHUNK_SIZE_FLAG)
   {
     // If FmtChunkSize is greater than 16, then there are more header data. It must be ignored.
-    unsigned short extraParamsSize;
+    uint16_t extraParamsSize;
     bytesRead = fread(&extraParamsSize, 1, sizeof(extraParamsSize), fid);
     ensure(bytesRead > 0);
 
     // Now read the amount of bytes of specified on extraParamsSize.
-    char* extraParams = new char[extraParamsSize];
-    bytesRead = fread(extraParams, 1, static_cast<size_t>(extraParamsSize), fid);
-    ensure(bytesRead > 0);
-    delete[] extraParams;
+    if (extraParamsSize > 0)
+    {
+      char* extraParams = new char[extraParamsSize];
+      bytesRead = fread(extraParams, 1, static_cast<size_t>(extraParamsSize), fid);
+      ensure(bytesRead > 0);
+      delete[] extraParams;
+    }
   }
 
   // Find "data" string in file from here
@@ -70,13 +68,13 @@ CAudioBuffer* CAudioBuffer::Load(const char* _filename)
     ensure_msg(bytesRead > 0, "Data string not found in wav file");
 
     // Read next 4 bytes to know how many bytes this field has
-    int bytesToRead;
-    bytesRead = fread(&bytesToRead, 1, sizeof(int), fid);
+    uint32_t bytesToRead;
+    bytesRead = fread(&bytesToRead, 1, sizeof(bytesToRead), fid);
     ensure(bytesRead > 0);
 
     // Alloc memory and read
     dataField = new char[bytesToRead];
-    bytesRead = fread(dataField, 1, static_cast<size_t>(bytesToRead), fid);
+    bytesRead = fread(dataField, 1, bytesToRead, fid);
     ensure(bytesRead > 0);
 
     // Check if it is the correct field
