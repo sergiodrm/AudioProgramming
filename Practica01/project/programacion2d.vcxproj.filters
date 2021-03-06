@@ -1,48 +1,222 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{84b8aa7f-b488-4e3f-9bf3-6925b6e585f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{ddb1d09a-35ab-4b15-a713-e9b49d15b055}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Engine\Render">
+      <UniqueIdentifier>{74cc458c-37bf-4e97-893c-3be155f9df93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObjects">
+      <UniqueIdentifier>{77cd94f7-612c-49cc-adc6-f98ed425d492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObjects\Components">
+      <UniqueIdentifier>{6c29bbff-1cb0-420d-bf60-710e598261b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObjects\Components\Base">
+      <UniqueIdentifier>{fda06ec1-1479-4983-9da0-1142ed29af51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObjects\Components\Derived">
+      <UniqueIdentifier>{e8e98223-4b55-4366-8e8b-77bdc78c898c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\World">
+      <UniqueIdentifier>{e9ce9138-fe50-4ac6-8a8f-87ef60d876d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{f23f06bb-b971-4016-aa9f-6caf57bcd752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Misc">
+      <UniqueIdentifier>{21bc739f-9b58-41e4-a626-7da246045345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math">
+      <UniqueIdentifier>{6a793647-c786-44c2-b39d-addb5040ae03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{aa190e61-8ec4-4271-b8a8-a3a8da76e5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Timer">
+      <UniqueIdentifier>{6ce23026-1dfb-4838-9a9b-1269f8ed2259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{502649fe-6dd7-4120-aeb3-9cf80bccddb5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\pugixml.cpp">
+      <Filter>Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TimeManager.cpp">
+      <Filter>Engine\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\GameObject.cpp">
+      <Filter>Engine\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Component.cpp">
+      <Filter>Engine\GameObjects\Components\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TransformComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Vec2.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InputManager.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RenderEngine.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TextureManager.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SpriteComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CameraComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MovementComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InputCodes.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RigidBodyComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Collider.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PhysicsEngine.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Map.cpp">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scene.cpp">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\World.cpp">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MacroUtility.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BackgroundComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Utility.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioManager.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
-      <Filter>Header Files</Filter>
+      <Filter>Libs</Filter>
     </ClInclude>
-    <ClInclude Include="..\openal\AL\al.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\src\GameObject.h">
+      <Filter>Engine\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\openal\AL\alc.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\src\Component.h">
+      <Filter>Engine\GameObjects\Components\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\openal\AL\alext.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\src\TransformComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="..\openal\AL\efx.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\src\SpriteComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="..\openal\AL\efx-creative.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\src\CameraComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MovementComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InputCodes.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RigidBodyComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BackgroundComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CompileLibs.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Dispatcher.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InputManager.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Vec2.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SingletonBase.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utility.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Collider.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PhysicsEngine.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RenderEngine.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TextureManager.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TimeManager.h">
+      <Filter>Engine\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Map.h">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scene.h">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\World.h">
+      <Filter>Engine\World</Filter>
     </ClInclude>
     <ClInclude Include="..\openal\AL\efx-presets.h">
-      <Filter>Header Files</Filter>
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\openal\AL\efx.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\openal\AL\efx-creative.h">
+      <Filter>Libs</Filter>
     </ClInclude>
     <ClInclude Include="..\openal\AL\alut.h">
-      <Filter>Header Files</Filter>
+      <Filter>Libs</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="..\openal\AL\alext.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\openal\AL\alc.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\openal\AL\al.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MacroUtility.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioManager.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioBuffer.h" />
   </ItemGroup>
 </Project>

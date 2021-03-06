@@ -27,41 +27,92 @@
     <ClInclude Include="..\openal\AL\efx-creative.h" />
     <ClInclude Include="..\openal\AL\efx-presets.h" />
     <ClInclude Include="..\openal\AL\efx.h" />
+    <ClInclude Include="..\src\AudioBuffer.h" />
+    <ClInclude Include="..\src\AudioManager.h" />
+    <ClInclude Include="..\src\BackgroundComponent.h" />
+    <ClInclude Include="..\src\CameraComponent.h" />
+    <ClInclude Include="..\src\Collider.h" />
+    <ClInclude Include="..\src\CompileLibs.h" />
+    <ClInclude Include="..\src\Component.h" />
+    <ClInclude Include="..\src\Dispatcher.h" />
+    <ClInclude Include="..\src\GameObject.h" />
+    <ClInclude Include="..\src\InputCodes.h" />
+    <ClInclude Include="..\src\InputManager.h" />
+    <ClInclude Include="..\src\MacroUtility.h" />
+    <ClInclude Include="..\src\Map.h" />
+    <ClInclude Include="..\src\MovementComponent.h" />
+    <ClInclude Include="..\src\PhysicsEngine.h" />
+    <ClInclude Include="..\src\RenderEngine.h" />
+    <ClInclude Include="..\src\RigidBodyComponent.h" />
+    <ClInclude Include="..\src\Scene.h" />
+    <ClInclude Include="..\src\SingletonBase.h" />
+    <ClInclude Include="..\src\SpriteComponent.h" />
+    <ClInclude Include="..\src\TextureManager.h" />
+    <ClInclude Include="..\src\TimeManager.h" />
+    <ClInclude Include="..\src\TransformComponent.h" />
+    <ClInclude Include="..\src\Utility.h" />
+    <ClInclude Include="..\src\Vec2.h" />
+    <ClInclude Include="..\src\World.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\src\AudioBuffer.cpp" />
+    <ClCompile Include="..\src\AudioManager.cpp" />
+    <ClCompile Include="..\src\BackgroundComponent.cpp" />
+    <ClCompile Include="..\src\CameraComponent.cpp" />
+    <ClCompile Include="..\src\Collider.cpp" />
+    <ClCompile Include="..\src\Component.cpp" />
+    <ClCompile Include="..\src\GameObject.cpp" />
+    <ClCompile Include="..\src\InputCodes.cpp" />
+    <ClCompile Include="..\src\InputManager.cpp" />
+    <ClCompile Include="..\src\MacroUtility.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Map.cpp" />
+    <ClCompile Include="..\src\MovementComponent.cpp" />
+    <ClCompile Include="..\src\PhysicsEngine.cpp" />
+    <ClCompile Include="..\src\pugixml.cpp" />
+    <ClCompile Include="..\src\RenderEngine.cpp" />
+    <ClCompile Include="..\src\RigidBodyComponent.cpp" />
+    <ClCompile Include="..\src\Scene.cpp" />
+    <ClCompile Include="..\src\SpriteComponent.cpp" />
+    <ClCompile Include="..\src\TextureManager.cpp" />
+    <ClCompile Include="..\src\TimeManager.cpp" />
+    <ClCompile Include="..\src\TransformComponent.cpp" />
+    <ClCompile Include="..\src\Utility.cpp" />
+    <ClCompile Include="..\src\Vec2.cpp" />
+    <ClCompile Include="..\src\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{12C74402-E6BB-4B59-A4A7-43EEAE9E5D6A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>programacion2d</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Practise01</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
