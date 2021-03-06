@@ -27,11 +27,13 @@ private:
 
 public:
 
+  /**
+   * @todo to handle more audio files, before load should be checked if current file has been loaded previously.
+   */
   static CAudioBuffer* Load(const char* _filename);
   static void Destroy(CAudioBuffer* _buffer);
 
   uint32_t GetALBuffer() const;
-
 
 ///  Properties
 

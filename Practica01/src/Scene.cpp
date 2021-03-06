@@ -20,19 +20,21 @@
  */
 #define AUDIO_FILE "data/file1.wav"
 #define AUDIO_MUSIC "data/music.wav"
+#define AUDIO_TAKE_ON_ME "data/takeonme.wav"
+#define AUDIO_GAME_OVER "data/gameover.wav"
 
 /**
  *  Increment data
  */
-#define DELTA_PITCH 0.1f
+#define DELTA_PITCH 0.02f
 #define DELTA_GAIN 0.1f
-#define DELTA_POSITION 0.1f
+#define DELTA_POSITION 0.5f
 
 CScene::CScene() {}
 
 void CScene::Init()
 {
-  m_audioBuffer = CAudioBuffer::Load(AUDIO_MUSIC);
+  m_audioBuffer = CAudioBuffer::Load(AUDIO_GAME_OVER);
   ensure(m_audioBuffer);
   m_audioSource = new CAudioSource(m_audioBuffer);
   ensure(m_audioSource);
@@ -58,6 +60,7 @@ void CScene::Init()
 
 void CScene::Shutdown()
 {
+  CAudioListener::Shutdown();
   delete m_audioSource;
   CAudioBuffer::Destroy(m_audioBuffer);
 }
@@ -80,7 +83,12 @@ void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _acti
     case SInputCode::Right:
       m_sourceData.m_position[1] -= DELTA_POSITION;
       break;
+    case SInputCode::Escape:
+      CRenderEngine::GetInstance().CloseWindow();
     }
     SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
+    PRINT_LOG("---");
+    PRINT_LOG("Current source pitch:    %.3f", m_sourceData.m_pitch);
+    PRINT_LOG("Current source position: [%.3f, %.3f, %.3f]", m_sourceData.m_position[0], m_sourceData.m_position[1], m_sourceData.m_position[2]);
   }
 }

@@ -1,8 +1,13 @@
 #pragma once
 
+#include <map>
+#include <string>
+
+
 #include "SingletonBase.h"
 
 // Forward declaration
+class CAudioBuffer;
 struct ALCdevice_struct;
 typedef ALCdevice_struct ALCdevice;
 struct ALCcontext_struct;
@@ -26,9 +31,15 @@ private:
 public:
 
 private:
-
+  
+  /// OpenAL properties
+  
   ALCdevice* m_device;
   ALCcontext* m_context;
+  
+  /**
+   * @todo audio files handling should be here
+   */
 
 };
 

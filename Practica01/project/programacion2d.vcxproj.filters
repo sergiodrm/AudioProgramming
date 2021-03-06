@@ -121,7 +121,9 @@
     <ClCompile Include="..\src\AudioSource.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AudioListener.cpp" />
+    <ClCompile Include="..\src\AudioListener.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
@@ -235,6 +237,8 @@
     <ClInclude Include="..\src\AudioSource.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AudioListener.h" />
+    <ClInclude Include="..\src\AudioListener.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
