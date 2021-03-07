@@ -13,7 +13,9 @@
 #include "AudioBuffer.h"
 #include "AudioSource.h"
 #include "AudioListener.h"
+#include "AudioListenerComponent.h"
 #include "AudioManager.h"
+#include "BasicShapeComponent.h"
 
 
 /**
@@ -52,8 +54,20 @@ void CScene::Init()
   m_sourceData.m_loop = false;
   SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
 
-  CAudioListener::Init();
   m_audioSource->Play();
+
+  // Init player game object
+  CGameObject* playerGameObject = CGameObject::Create();
+  CMovementComponent* movementComponent = playerGameObject->AddComponent<CMovementComponent>();
+  movementComponent->SetControlledByPlayer(true);
+  CAudioListenerComponent* audioListenerComponent = playerGameObject->AddComponent<CAudioListenerComponent>();
+  audioListenerComponent->ActiveListener();
+  CBasicShapeComponent* shapeComponent = playerGameObject->AddComponent<CBasicShapeComponent>();
+  shapeComponent->SetShapeType(CBasicShapeComponent::Circle);
+
+  playerGameObject->Active();
+  
+
 
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);

@@ -1,5 +1,7 @@
 #include "AudioManager.h"
 
+
+#include "AudioListener.h"
 #include "MacroUtility.h"
 #include "AL/al.h"
 #include "AL/alc.h"
@@ -31,6 +33,7 @@ void CAudioManager::Init_Internal()
   ensure_msg(m_context, "Audio manager init failed");
   print_log("Setting OpenAL context...");
   alcMakeContextCurrent(m_context);
+  CAudioListener::Init();
 
   print_log("OpenAL initialized successfully.");
 }

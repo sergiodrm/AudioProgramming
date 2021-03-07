@@ -9,6 +9,7 @@
 #include "SpriteComponent.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
+#include "RenderComponent.h"
 
 #pragma warning(disable : 4172)
 
@@ -33,10 +34,10 @@ void CWorld::RenderWorld(const Vec2& screenSize) const
   // Render backgrounds
   for (CGameObject* iterator : m_backgrounds)
   {
-    CSpriteComponent* spriteComponent = iterator->GetComponent<CSpriteComponent>();
-    if (spriteComponent != nullptr)
+    CRenderComponent* renderComponent = iterator->GetComponent<CRenderComponent>();
+    if (renderComponent != nullptr)
     {
-      spriteComponent->Render();
+      renderComponent->Render();
     }
   }
 
@@ -47,10 +48,10 @@ void CWorld::RenderWorld(const Vec2& screenSize) const
   // Render game objects (those which can be rendered)
   for (CGameObject* iterator : m_gameObjects)
   {
-    CSpriteComponent* spriteComponent = iterator->GetComponent<CSpriteComponent>();
-    if (spriteComponent != nullptr)
+    CRenderComponent* renderComponent = iterator->GetComponent<CRenderComponent>();
+    if (renderComponent != nullptr)
     {
-      spriteComponent->Render();
+      renderComponent->Render();
     }
   }
 }
