@@ -25,10 +25,17 @@ void CMovementComponent::Update(float _deltaTime)
     CTransformComponent* transformComponent = GetOwner()->GetComponent<CTransformComponent>();
     CRigidBodyComponent* rigidBodyComponent = GetOwner()->GetComponent<CRigidBodyComponent>();
     Vec2 updatedPosition = transformComponent->GetPosition() + m_movementInput * _deltaTime;
-    if (rigidBodyComponent != nullptr && !rigidBodyComponent->CheckAvailablePosition(updatedPosition))
+    if (rigidBodyComponent && rigidBodyComponent->IsPhysicsActived())
+    {
+      if (!rigidBodyComponent->CheckAvailablePosition(updatedPosition))
+      {
+        transformComponent->SetPosition(updatedPosition);
+        rigidBodyComponent->GetCollider()->SetPosition(updatedPosition);
+      }
+    }
+    else
     {
       transformComponent->SetPosition(updatedPosition);
-      rigidBodyComponent->GetCollider()->SetPosition(updatedPosition);
     }
   }
 }

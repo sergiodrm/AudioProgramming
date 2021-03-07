@@ -84,28 +84,5 @@ void CScene::Shutdown()
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)
 {
-  if (_action == SInputCode::Press)
-  {
-    switch (_key)
-    {
-    case SInputCode::Up:
-      m_sourceData.m_pitch += DELTA_PITCH;
-      break;
-    case SInputCode::Down:
-      m_sourceData.m_pitch -= DELTA_PITCH;
-      break;
-    case SInputCode::Left:
-      m_sourceData.m_position[1] += DELTA_POSITION;
-      break;
-    case SInputCode::Right:
-      m_sourceData.m_position[1] -= DELTA_POSITION;
-      break;
-    case SInputCode::Escape:
-      CRenderEngine::GetInstance().CloseWindow();
-    }
-    SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
-    print_log("---");
-    print_log("Current source pitch:    %.3f", m_sourceData.m_pitch);
-    print_log("Current source position: [%.3f, %.3f, %.3f]", m_sourceData.m_position[0], m_sourceData.m_position[1], m_sourceData.m_position[2]);
-  }
+  
 }
