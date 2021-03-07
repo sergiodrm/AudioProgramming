@@ -40,13 +40,11 @@ void CAudioSourceComponent::LoadAudio(const char* _filename)
 {
   if (m_audioSource)
     return;
-
-  /**
-   * @todo implement audio buffer load from audio manager when it can handle the memory buffers
-   */
+  
   CAudioBuffer* audioBuffer = CAudioBuffer::Load(_filename);
   ensure(audioBuffer);
   m_audioSource = new CAudioSource(audioBuffer);
+  delete audioBuffer;
 }
 
 CAudioSource* CAudioSourceComponent::GetAudioSource() const { return m_audioSource; }

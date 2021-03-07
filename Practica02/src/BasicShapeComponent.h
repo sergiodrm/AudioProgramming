@@ -20,6 +20,8 @@ public:
   virtual void Render() const override;
 
   void SetShapeType(EShapes _type);
+  void SetColor(float _r, float _g, float _b, float _a);
+  void SetSize(const Vec2& _size);
 
 private:
 

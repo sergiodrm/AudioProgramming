@@ -66,9 +66,16 @@ void CMovementComponent::ProcessInput(SInputCode::EKey _key, SInputCode::EAction
     {
       m_movementInput.SetX(_action == SInputCode::EAction::Press || _action == SInputCode::EAction::Maintain ? m_speed : 0.f);
     }
+    else if (_key == SInputCode::Up || _key == SInputCode::W)
+    {
+      m_movementInput.SetY(_action == SInputCode::Press || _action == SInputCode::Maintain ? -m_speed : 0.f);
+    } else if (_key == SInputCode::Down || _key == SInputCode::S)
+    {
+      m_movementInput.SetY(_action == SInputCode::Press || _action == SInputCode::Maintain ? m_speed : 0.f);
+    }
     else if ((_key == SInputCode::Space || _key == SInputCode::Up || _key == SInputCode::W) && _action == SInputCode::EAction::Press)
     {
-      Jump();
+      //Jump();
     }
     else if (_key == SInputCode::Escape)
     {

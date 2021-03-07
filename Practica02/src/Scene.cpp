@@ -15,16 +15,15 @@
 #include "AudioListener.h"
 #include "AudioListenerComponent.h"
 #include "AudioManager.h"
+#include "AudioSourceComponent.h"
 #include "BasicShapeComponent.h"
+#include "TransformComponent.h"
 
 
 /**
  *  Files
  */
-#define AUDIO_FILE "data/file1.wav"
-#define AUDIO_MUSIC "data/music.wav"
-#define AUDIO_TAKE_ON_ME "data/takeonme.wav"
-#define AUDIO_GAME_OVER "data/gameover.wav"
+#define AUDIO_ENGINE "data/engine.wav"
 
 /**
  *  Increment data
@@ -37,41 +36,39 @@ CScene::CScene() {}
 
 void CScene::Init()
 {
-  CAudioManager::Get().CreateALBufferFromFile(AUDIO_GAME_OVER);
-  CAudioBuffer* audioBuffer = CAudioBuffer::Load(AUDIO_GAME_OVER);
-  ensure(audioBuffer);
-  m_audioSource = new CAudioSource(audioBuffer);
-  ensure(m_audioSource);
+  // Load audio files in memory
+  CAudioManager::Get().CreateALBufferFromFile(AUDIO_ENGINE);
 
-  m_sourceData.m_pitch = 1.f;
-  m_sourceData.m_gain = 1.f;
-  m_sourceData.m_position[0] = 0.f;
-  m_sourceData.m_position[1] = 0.f;
-  m_sourceData.m_position[2] = 0.f;
-  m_sourceData.m_velocity[0] = 0.f;
-  m_sourceData.m_velocity[1] = 0.f;
-  m_sourceData.m_velocity[2] = 0.f;
-  m_sourceData.m_loop = false;
-  SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
+  {
+    // Init player game object
+    CGameObject* playerGameObject = CGameObject::Create();
+    CMovementComponent* movementComponent = playerGameObject->AddComponent<CMovementComponent>();
+    movementComponent->SetControlledByPlayer(true);
+    CAudioListenerComponent* audioListenerComponent = playerGameObject->AddComponent<CAudioListenerComponent>();
+    audioListenerComponent->ActiveListener();
+    CBasicShapeComponent* shapeComponent = playerGameObject->AddComponent<CBasicShapeComponent>();
+    shapeComponent->SetShapeType(CBasicShapeComponent::Circle);
+    playerGameObject->Active();
+    
+    Vec2 screenSize = CRenderEngine::GetInstance().GetWindowSize();
+    playerGameObject->GetComponent<CTransformComponent>()->SetPosition(Vec2(screenSize.GetX() * 0.5f, screenSize.GetY() - 150.f));
+  }
 
-  m_audioSource->Play();
-
-  // Init player game object
-  CGameObject* playerGameObject = CGameObject::Create();
-  CMovementComponent* movementComponent = playerGameObject->AddComponent<CMovementComponent>();
-  movementComponent->SetControlledByPlayer(true);
-  CAudioListenerComponent* audioListenerComponent = playerGameObject->AddComponent<CAudioListenerComponent>();
-  audioListenerComponent->ActiveListener();
-  CBasicShapeComponent* shapeComponent = playerGameObject->AddComponent<CBasicShapeComponent>();
-  shapeComponent->SetShapeType(CBasicShapeComponent::Circle);
-
-  playerGameObject->Active();
-  
-
+  {
+    // Init audio source game object
+    CGameObject* sourceGameObject = CGameObject::Create();
+    CAudioSourceComponent* audioSourceComponent = sourceGameObject->AddComponent<CAudioSourceComponent>();
+    audioSourceComponent->LoadAudio(AUDIO_ENGINE);
+    CBasicShapeComponent* shapeComponent = sourceGameObject->AddComponent<CBasicShapeComponent>();
+    shapeComponent->SetColor(0.5f, 0.1f, 0.1f, 1.f);
+    shapeComponent->SetSize(Vec2(20.f, 20.f));
+    audioSourceComponent->GetAudioSource()->SetLooping(true);
+    sourceGameObject->Active();
+    audioSourceComponent->GetAudioSource()->Play();
+  }
 
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);
-  delete audioBuffer;
 }
 
 

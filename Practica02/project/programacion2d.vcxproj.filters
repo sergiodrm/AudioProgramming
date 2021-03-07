@@ -130,8 +130,10 @@
     <ClCompile Include="..\src\AudioListenerComponent.cpp">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\BasicShapeComponent.cpp" />
     <ClCompile Include="..\src\RenderComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BasicShapeComponent.cpp">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClCompile>
   </ItemGroup>
@@ -259,6 +261,8 @@
     <ClInclude Include="..\src\RenderComponent.h">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\BasicShapeComponent.h" />
+    <ClInclude Include="..\src\BasicShapeComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -110,7 +110,8 @@ void CAudioManager::ClearLoadedFiles()
     if (iterator.second != AL_INVALID_BUFFER)
     {
       print_log("Removing %s from memory.", iterator.first);
-      al_call(alDeleteBuffers(1, &iterator.second));
+      unsigned* buffer = &iterator.second;
+      al_call(alDeleteBuffers(1, buffer));
     }
   }
 }
