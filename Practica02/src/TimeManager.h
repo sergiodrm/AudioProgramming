@@ -26,6 +26,7 @@ public:
 
   double GetFixedTick() const;
   double GetTimeBetweenFrames() const;
+  double GetTotalSeconds() const;
 
 private:
 

@@ -17,6 +17,7 @@
 #include "AudioManager.h"
 #include "AudioSourceComponent.h"
 #include "BasicShapeComponent.h"
+#include "CircleMovementComponent.h"
 #include "TransformComponent.h"
 
 
@@ -63,8 +64,12 @@ void CScene::Init()
     shapeComponent->SetColor(0.5f, 0.1f, 0.1f, 1.f);
     shapeComponent->SetSize(Vec2(20.f, 20.f));
     audioSourceComponent->GetAudioSource()->SetLooping(true);
+    CCircleMovementComponent* circleMovementComponent = sourceGameObject->AddComponent<CCircleMovementComponent>();
+    circleMovementComponent->SetCenter(CRenderEngine::GetInstance().GetWindowSize() / 2.f);
+    circleMovementComponent->SetRadius(CRenderEngine::GetInstance().GetWindowSize().GetY() / 4.f);
     sourceGameObject->Active();
-    audioSourceComponent->GetAudioSource()->Play();
+
+    //audioSourceComponent->GetAudioSource()->Play();
   }
 
   // Bind method to receive input from player
@@ -75,8 +80,6 @@ void CScene::Init()
 void CScene::Shutdown()
 {
   CAudioListener::Shutdown();
-  delete m_audioSource;
-  CAudioManager::Get().ClearLoadedFiles();
 }
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)

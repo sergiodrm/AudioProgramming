@@ -38,6 +38,7 @@
     <ClInclude Include="..\src\BackgroundComponent.h" />
     <ClInclude Include="..\src\BasicShapeComponent.h" />
     <ClInclude Include="..\src\CameraComponent.h" />
+    <ClInclude Include="..\src\CircleMovementComponent.h" />
     <ClInclude Include="..\src\Collider.h" />
     <ClInclude Include="..\src\CompileLibs.h" />
     <ClInclude Include="..\src\Component.h" />
@@ -72,6 +73,7 @@
     <ClCompile Include="..\src\BackgroundComponent.cpp" />
     <ClCompile Include="..\src\BasicShapeComponent.cpp" />
     <ClCompile Include="..\src\CameraComponent.cpp" />
+    <ClCompile Include="..\src\CircleMovementComponent.cpp" />
     <ClCompile Include="..\src\Collider.cpp" />
     <ClCompile Include="..\src\Component.cpp" />
     <ClCompile Include="..\src\RenderComponent.cpp" />

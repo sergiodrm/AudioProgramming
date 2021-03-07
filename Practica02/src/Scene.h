@@ -18,8 +18,6 @@ public:
   void ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action);
 
 private:
-
-  CAudioSource* m_audioSource;
-  SSourceData m_sourceData;
+  
 };
 

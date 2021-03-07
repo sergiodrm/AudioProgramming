@@ -39,6 +39,8 @@ void CAudioManager::Init_Internal()
 }
 void CAudioManager::Shutdown_Internal()
 {
+  ClearLoadedFiles();
+
   // Destroy context and device
   alcMakeContextCurrent(nullptr);
   alcDestroyContext(m_context);
