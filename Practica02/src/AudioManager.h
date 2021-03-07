@@ -1,8 +1,6 @@
 #pragma once
 
 #include <map>
-#include <string>
-
 
 #include "SingletonBase.h"
 
@@ -30,6 +28,37 @@ private:
 
 public:
 
+  unsigned CreateALBufferFromFile(const char* _filename);
+  unsigned FindALBuffer(const char* _filename) const;
+  void RemoveLoadedFile(const char* _filename);
+  void ClearLoadedFiles();
+
+private:
+
+  struct SWavHeader
+  {
+    uint32_t chunkID; 
+    uint32_t riffChunkSize;
+    uint32_t format; 
+    uint32_t fmtSubchunkID;
+    uint32_t fmtChunkSize;
+    uint16_t audioFormat;
+    uint16_t numChannels;
+    uint32_t sampleRate;
+    uint32_t byteRate;
+    uint16_t blockAlign;
+    uint16_t bitsPerSample;
+  };
+
+  struct SWavData
+  {
+    SWavHeader header;
+    char* data;
+    size_t dataSize;
+  };
+
+  static SWavData* LoadWavFile(const char* _filename);
+
 private:
   
   /// OpenAL properties
@@ -40,6 +69,6 @@ private:
   /**
    * @todo audio files handling should be here
    */
-
+  std::map<const char*, unsigned> m_audioFilesLoaded;
 };
 

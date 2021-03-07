@@ -127,7 +127,9 @@
     <ClCompile Include="..\src\AudioSourceComponent.cpp">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AudioListenerComponent.cpp" />
+    <ClCompile Include="..\src\AudioListenerComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
@@ -247,6 +249,8 @@
     <ClInclude Include="..\src\AudioSourceComponent.h">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AudioListenerComponent.h" />
+    <ClInclude Include="..\src\AudioListenerComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ const ltex_t* CTextureManager::CreateTexture(const char * _sFilename)
   const ltex_t* texture = GetTexture(_sFilename);
   if (texture == nullptr)
   {
-    PRINT_LOG("Loading new texture: \"%s\"", _sFilename);
+    print_log("Loading new texture: \"%s\"", _sFilename);
     ltex_t* newTexture = CreateTexture_Internal(_sFilename);
     m_textureRegister.insert(TextureRegisterItem(_sFilename, newTexture));
     return newTexture;
@@ -56,7 +56,7 @@ void CTextureManager::RemoveTexture(const char* _sFilename)
   TextureRegisterIterator iterator = m_textureRegister.find(_sFilename);
   if (iterator != m_textureRegister.end())
   {
-    PRINT_LOG("Removing texture from memory: \"%s\"", _sFilename);
+    print_log("Removing texture from memory: \"%s\"", _sFilename);
     ltex_free(iterator->second);
     m_textureRegister.erase(iterator);
   }
@@ -85,7 +85,7 @@ void CTextureManager::Clear()
   for (std::pair<const std::string, ltex_t*>& iterator : m_textureRegister)
   {
     ensure(iterator.second != nullptr);
-    PRINT_LOG("Removing texture from memory: \"%s\"", iterator.first.c_str());
+    print_log("Removing texture from memory: \"%s\"", iterator.first.c_str());
     CRenderEngine::FreeTexture(iterator.second);
   }
   m_textureRegister.clear();

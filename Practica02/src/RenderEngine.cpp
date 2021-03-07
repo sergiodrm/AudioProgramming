@@ -43,7 +43,7 @@ void CRenderEngine::Init_Internal()
 
   // Init vars
   m_screenSize = Vec2(SCR_WIDTH, SCR_HEIGHT);
-  PRINT_LOG("Render initialized successfuly.");
+  print_log("Render initialized successfuly.");
 }
 
 void CRenderEngine::Init()
@@ -73,7 +73,7 @@ void CRenderEngine::Shutdown()
 void CRenderEngine::Shutdown_Internal()
 {
   glfwTerminate();
-  PRINT_LOG("Render terminated successfuly.");
+  print_log("Render terminated successfuly.");
 }
 
 bool CRenderEngine::IsRunning() const

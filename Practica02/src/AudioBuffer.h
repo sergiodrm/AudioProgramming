@@ -4,34 +4,14 @@
 
 class CAudioBuffer
 {
-private:
-
-  struct SWavHeader
-  {
-    uint32_t chunkID; 
-    uint32_t riffChunkSize;
-    uint32_t format; 
-    uint32_t fmtSubchunkID;
-    uint32_t fmtChunkSize;
-    uint16_t audioFormat;
-    uint16_t numChannels;
-    uint32_t sampleRate;
-    uint32_t byteRate;
-    uint16_t blockAlign;
-    uint16_t bitsPerSample;
-  };
 
 private:
 
   CAudioBuffer();
 
 public:
-
-  /**
-   * @todo to handle more audio files, before load should be checked if current file has been loaded previously.
-   */
+  
   static CAudioBuffer* Load(const char* _filename);
-  static void Destroy(CAudioBuffer* _buffer);
 
   uint32_t GetALBuffer() const;
 

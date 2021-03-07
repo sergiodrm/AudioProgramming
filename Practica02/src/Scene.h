@@ -20,7 +20,6 @@ public:
 private:
 
   CAudioSource* m_audioSource;
-  CAudioBuffer* m_audioBuffer;
   SSourceData m_sourceData;
 };
 

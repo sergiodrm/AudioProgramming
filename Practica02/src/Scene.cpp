@@ -13,6 +13,7 @@
 #include "AudioBuffer.h"
 #include "AudioSource.h"
 #include "AudioListener.h"
+#include "AudioManager.h"
 
 
 /**
@@ -34,9 +35,10 @@ CScene::CScene() {}
 
 void CScene::Init()
 {
-  m_audioBuffer = CAudioBuffer::Load(AUDIO_GAME_OVER);
-  ensure(m_audioBuffer);
-  m_audioSource = new CAudioSource(m_audioBuffer);
+  CAudioManager::Get().CreateALBufferFromFile(AUDIO_GAME_OVER);
+  CAudioBuffer* audioBuffer = CAudioBuffer::Load(AUDIO_GAME_OVER);
+  ensure(audioBuffer);
+  m_audioSource = new CAudioSource(audioBuffer);
   ensure(m_audioSource);
 
   m_sourceData.m_pitch = 1.f;
@@ -55,6 +57,7 @@ void CScene::Init()
 
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);
+  delete audioBuffer;
 }
 
 
@@ -62,7 +65,7 @@ void CScene::Shutdown()
 {
   CAudioListener::Shutdown();
   delete m_audioSource;
-  CAudioBuffer::Destroy(m_audioBuffer);
+  CAudioManager::Get().ClearLoadedFiles();
 }
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)
@@ -87,8 +90,8 @@ void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _acti
       CRenderEngine::GetInstance().CloseWindow();
     }
     SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
-    PRINT_LOG("---");
-    PRINT_LOG("Current source pitch:    %.3f", m_sourceData.m_pitch);
-    PRINT_LOG("Current source position: [%.3f, %.3f, %.3f]", m_sourceData.m_position[0], m_sourceData.m_position[1], m_sourceData.m_position[2]);
+    print_log("---");
+    print_log("Current source pitch:    %.3f", m_sourceData.m_pitch);
+    print_log("Current source position: [%.3f, %.3f, %.3f]", m_sourceData.m_position[0], m_sourceData.m_position[1], m_sourceData.m_position[2]);
   }
 }

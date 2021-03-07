@@ -71,7 +71,7 @@ void CRigidBodyComponent::CreateCollider(EColliderType _type, EColliderStatus _s
     CRenderEngine::GetInstance().BindDrawCallback<CCollider, &CCollider::Render>(m_collider);
     m_collider->SetColor(0.5f, 0.1f, 0.1f, 0.3f);
 #endif
-  } else PRINT_WARNING("Collider already exists.");
+  } else print_warning("Collider already exists.");
 }
 
 void CRigidBodyComponent::DestroyCollider()

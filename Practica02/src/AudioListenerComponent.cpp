@@ -12,7 +12,6 @@ void CAudioListenerComponent::Update(float _deltaTime)
 {
   if (IsActive() && IsListenerActive())
   {
-    Super::Update(_deltaTime);
 
     // Update position from transform component
     CTransformComponent* transformComponent = GetOwner()->GetComponent<CTransformComponent>();
