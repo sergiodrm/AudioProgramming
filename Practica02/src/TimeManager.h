@@ -4,17 +4,7 @@
 
 class CTimeManager : public ISingletonBase<CTimeManager>
 {
-  DECLARE_SINGLETON_CLASS(CTimeManager)
-private:
-
-  double m_elapsedTime;
-  double m_maxElapsedTime;
-  double m_timeBetweenFrames;
-  double m_fixedTick;
-  double m_previousTime;
-  double m_totalTime;
-  double m_logicTime;
-
+DECLARE_SINGLETON_CLASS(CTimeManager)
 public:
 
   static CTimeManager& GetTimer();
@@ -32,5 +22,13 @@ private:
 
   void Init_Internal(double _fixedTick);
 
-};
+private:
 
+  double m_elapsedTime;
+  double m_maxElapsedTime;
+  double m_timeBetweenFrames;
+  double m_fixedTick;
+  double m_previousTime;
+  double m_totalTime;
+  double m_logicTime;
+};

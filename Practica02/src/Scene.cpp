@@ -33,6 +33,11 @@
 #define DELTA_GAIN 0.1f
 #define DELTA_POSITION 0.5f
 
+/**
+ *  Misc constants 
+ */
+#define DOPPLER_SPEED 343.3f
+
 CScene::CScene() {}
 
 void CScene::Init()
@@ -50,9 +55,10 @@ void CScene::Init()
     CBasicShapeComponent* shapeComponent = playerGameObject->AddComponent<CBasicShapeComponent>();
     shapeComponent->SetShapeType(CBasicShapeComponent::Circle);
     playerGameObject->Active();
-    
+
     Vec2 screenSize = CRenderEngine::GetInstance().GetWindowSize();
-    playerGameObject->GetComponent<CTransformComponent>()->SetPosition(Vec2(screenSize.GetX() * 0.5f, screenSize.GetY() - 150.f));
+    playerGameObject->GetComponent<CTransformComponent>()->SetPosition(
+      Vec2(screenSize.GetX() * 0.5f, screenSize.GetY() - 150.f));
   }
 
   {
@@ -69,7 +75,9 @@ void CScene::Init()
     circleMovementComponent->SetRadius(CRenderEngine::GetInstance().GetWindowSize().GetY() / 4.f);
     sourceGameObject->Active();
 
-    //audioSourceComponent->GetAudioSource()->Play();
+    CAudioManager::Get().SetDopplerFactor(2.f);
+    CAudioManager::Get().SetDopplerVelocity(DOPPLER_SPEED);
+    audioSourceComponent->GetAudioSource()->Play();
   }
 
   // Bind method to receive input from player
@@ -83,6 +91,4 @@ void CScene::Shutdown()
 }
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)
-{
-  
-}
+{ }

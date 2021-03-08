@@ -10,9 +10,8 @@ public:
 
   CMovementComponent();
 
-  virtual void OnCreate() override;
-  virtual void Update(float _deltaTime) override;
-
+  void OnCreate() override;
+  void Update(float _deltaTime) override;
 
   void Jump();
   void SetControlledByPlayer(bool _process);
@@ -20,11 +19,12 @@ public:
   const Vec2& GetMovementDirection() const;
   float GetSpeed() const;
 
-private:
+  Vec2 GetLastFrameVelocity() const;
+
+protected:
 
   Vec2 m_movementInput;
   float m_speed;
   bool m_bProcessingInput;
-
+  Vec2 m_lastFramePosition;
 };
-

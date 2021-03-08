@@ -12,7 +12,6 @@ void CAudioSourceComponent::Update(float _deltaTime)
 {
   if (IsActive())
   {
-
     // Update position from transform component
     CTransformComponent* transformComponent = GetOwner()->GetComponent<CTransformComponent>();
     if (transformComponent)
@@ -25,7 +24,7 @@ void CAudioSourceComponent::Update(float _deltaTime)
     CMovementComponent* movementComponent = GetOwner()->GetComponent<CMovementComponent>();
     if (movementComponent)
     {
-      Vec2 velocity = movementComponent->GetMovementDirection() * movementComponent->GetSpeed();
+      Vec2 velocity = movementComponent->GetLastFrameVelocity();
       m_audioSource->SetVelocity(velocity.GetX(), velocity.GetY(), 0.f);
     }
   }
@@ -40,7 +39,7 @@ void CAudioSourceComponent::LoadAudio(const char* _filename)
 {
   if (m_audioSource)
     return;
-  
+
   CAudioBuffer* audioBuffer = CAudioBuffer::Load(_filename);
   ensure(audioBuffer);
   m_audioSource = new CAudioSource(audioBuffer);

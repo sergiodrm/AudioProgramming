@@ -1,4 +1,3 @@
-
 #include "AudioListenerComponent.h"
 #include "AudioListener.h"
 #include "GameObject.h"
@@ -12,7 +11,6 @@ void CAudioListenerComponent::Update(float _deltaTime)
 {
   if (IsActive() && IsListenerActive())
   {
-
     // Update position from transform component
     CTransformComponent* transformComponent = GetOwner()->GetComponent<CTransformComponent>();
     if (transformComponent)
@@ -25,7 +23,7 @@ void CAudioListenerComponent::Update(float _deltaTime)
     CMovementComponent* movementComponent = GetOwner()->GetComponent<CMovementComponent>();
     if (movementComponent)
     {
-      Vec2 velocity = movementComponent->GetMovementDirection() * movementComponent->GetSpeed();
+      Vec2 velocity = movementComponent->GetLastFrameVelocity();
       CAudioListener::Get().SetListenerVelocity(velocity.GetX(), velocity.GetY(), 0.f);
     }
   }

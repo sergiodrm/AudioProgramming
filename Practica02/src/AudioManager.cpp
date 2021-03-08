@@ -37,6 +37,7 @@ void CAudioManager::Init_Internal()
 
   print_log("OpenAL initialized successfully.");
 }
+
 void CAudioManager::Shutdown_Internal()
 {
   ClearLoadedFiles();
@@ -73,11 +74,15 @@ unsigned CAudioManager::CreateALBufferFromFile(const char* _filename)
   al_call(alGenBuffers(1, &buffer));
   if (wavData->header.bitsPerSample == 8)
   {
-    al_call(alBufferData(buffer, wavData->header.numChannels == 1 ? AL_FORMAT_MONO8 : AL_FORMAT_STEREO8, wavData->data, wavData->dataSize, wavData->header.sampleRate));
+    al_call(
+      alBufferData(buffer, wavData->header.numChannels == 1 ? AL_FORMAT_MONO8 : AL_FORMAT_STEREO8, wavData->data,
+        wavData->dataSize, wavData->header.sampleRate));
   }
   else if (wavData->header.bitsPerSample == 16)
   {
-    al_call(alBufferData(buffer, wavData->header.numChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, wavData->data, wavData->dataSize, wavData->header.sampleRate));
+    al_call(
+      alBufferData(buffer, wavData->header.numChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, wavData->data,
+        wavData->dataSize, wavData->header.sampleRate));
   }
   m_audioFilesLoaded.insert(std::make_pair(_filename, buffer));
   delete wavData->data;
@@ -116,6 +121,16 @@ void CAudioManager::ClearLoadedFiles()
       al_call(alDeleteBuffers(1, buffer));
     }
   }
+}
+
+void CAudioManager::SetDopplerFactor(float _factor)
+{
+  al_call(alDopplerFactor(_factor));
+}
+
+void CAudioManager::SetDopplerVelocity(float _speed)
+{
+  al_call(alDopplerVelocity(_speed));
 }
 
 CAudioManager::SWavData* CAudioManager::LoadWavFile(const char* _filename)
@@ -185,7 +200,7 @@ CAudioManager::SWavData* CAudioManager::LoadWavFile(const char* _filename)
       // If not, jump to next chunk
       fseek(fid, bytesToRead, SEEK_CUR);
     }
-    else 
+    else
     {
       bDataStringFoundFlag = true;
       // Alloc memory and read
@@ -201,7 +216,8 @@ CAudioManager::SWavData* CAudioManager::LoadWavFile(const char* _filename)
       print_error("Data not found in %s file", _filename);
       return nullptr;
     }
-  } while(!bDataStringFoundFlag);
+  }
+  while (!bDataStringFoundFlag);
 
   print_log("%s file contains %d bytes of data.", _filename, bytesRead);
   return wavData;
