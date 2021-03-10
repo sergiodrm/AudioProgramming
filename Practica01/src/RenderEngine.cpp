@@ -30,7 +30,7 @@ void CRenderEngine::Init_Internal()
   // Init window
   int iRenderStatus = glfwInit();
   ensure_msg(iRenderStatus == GLFW_TRUE, "GLFW library initialization failed.");
-  GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Practica 07 - Maps", nullptr, nullptr);
+  GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Practica 02 - Doppler", nullptr, nullptr);
   ensure(window != nullptr);
   glfwMakeContextCurrent(window);
   m_window = window;
@@ -43,7 +43,7 @@ void CRenderEngine::Init_Internal()
 
   // Init vars
   m_screenSize = Vec2(SCR_WIDTH, SCR_HEIGHT);
-  PRINT_LOG("Render initialized successfuly.");
+  print_log("Render initialized successfuly.");
 }
 
 void CRenderEngine::Init()
@@ -73,7 +73,7 @@ void CRenderEngine::Shutdown()
 void CRenderEngine::Shutdown_Internal()
 {
   glfwTerminate();
-  PRINT_LOG("Render terminated successfuly.");
+  print_log("Render terminated successfuly.");
 }
 
 bool CRenderEngine::IsRunning() const

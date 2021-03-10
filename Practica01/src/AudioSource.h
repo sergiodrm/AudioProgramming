@@ -6,7 +6,6 @@ class CAudioBuffer;
 
 class CAudioSource
 {
-
 public:
 
   CAudioSource(CAudioBuffer* _audioBuffer);
@@ -37,8 +36,5 @@ struct SSourceData
   float m_pitch;
   float m_gain;
   bool m_loop;
-  float m_position[3];
-  float m_velocity[3];
   static void SetAudioSourceSettings(CAudioSource& _source, const SSourceData& _data);
 };
-

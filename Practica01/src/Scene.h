@@ -4,7 +4,7 @@
 #include "World.h"
 #include "InputCodes.h"
 
-class CAudioBuffer;
+class CGameObject;
 
 class CScene
 {
@@ -19,8 +19,7 @@ public:
 
 private:
 
-  CAudioSource* m_audioSource;
-  CAudioBuffer* m_audioBuffer;
+  CGameObject* m_sourceGameObject;
+
   SSourceData m_sourceData;
 };
-

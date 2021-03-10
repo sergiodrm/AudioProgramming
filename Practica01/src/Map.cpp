@@ -103,7 +103,7 @@ CMap* CMap::LoadMap(const char* _filename, uint16_t _firstColId)
   pugi::xml_parse_result loadResult = doc.load_file(_filename);
   if (!loadResult)
   {
-    PRINT_ERROR(loadResult.description());
+    print_error(loadResult.description());
     return nullptr;
   }
   pugi::xml_node mapNode = doc.child("map");

@@ -9,14 +9,18 @@
 #include "TextureManager.h"
 #include "MovementComponent.h"
 #include "RenderEngine.h"
-#include "RigidBodyComponent.h"
+#include "AudioSourceComponent.h"
 #include "AudioBuffer.h"
 #include "AudioSource.h"
 #include "AudioListener.h"
+#include "AudioListenerComponent.h"
+#include "AudioManager.h"
+#include "BasicShapeComponent.h"
+#include "TransformComponent.h"
 
 
 /**
- *  Files
+ *  Files: to change the music, please change the macro in creation (line 42) and when it is loaded (line 48)
  */
 #define AUDIO_FILE "data/file1.wav"
 #define AUDIO_MUSIC "data/music.wav"
@@ -34,24 +38,46 @@ CScene::CScene() {}
 
 void CScene::Init()
 {
-  m_audioBuffer = CAudioBuffer::Load(AUDIO_TAKE_ON_ME);
-  ensure(m_audioBuffer);
-  m_audioSource = new CAudioSource(m_audioBuffer);
-  ensure(m_audioSource);
+  // Load audio file
+  CAudioManager::Get().CreateALBufferFromFile(AUDIO_MUSIC); // !!
+
+  // Create source game object
+  {
+    m_sourceGameObject = CGameObject::Create();
+    CAudioSourceComponent* audioSourceComponent = m_sourceGameObject->AddComponent<CAudioSourceComponent>();
+    audioSourceComponent->LoadAudio(AUDIO_MUSIC); // !!
+    CMovementComponent* movementComponent = m_sourceGameObject->AddComponent<CMovementComponent>();
+    movementComponent->SetControlledByPlayer(true);
+    CBasicShapeComponent* renderComponent = m_sourceGameObject->AddComponent<CBasicShapeComponent>();
+    renderComponent->SetColor(0.5f, 0.3f, 0.01f, 0.7f);
+    renderComponent->SetSize(Vec2(25.f, 25.f));
+    m_sourceGameObject->Active();
+    m_sourceGameObject->GetComponent<CTransformComponent>()->SetPosition(
+      CRenderEngine::GetInstance().GetWindowSize() * 0.5f);
+  }
+
+  // Create listener game object
+  {
+    CGameObject* listenerGameObject = CGameObject::Create();
+    CAudioListenerComponent* audioListenerComponent = listenerGameObject->AddComponent<CAudioListenerComponent>();
+    audioListenerComponent->ActiveListener();
+    CBasicShapeComponent* renderComponent = listenerGameObject->AddComponent<CBasicShapeComponent>();
+    renderComponent->SetColor(0.8f, 0.8f, 0.8f, 0.7f);
+    renderComponent->SetSize(Vec2(10.f, 10.f));
+    listenerGameObject->Active();
+    listenerGameObject->GetComponent<CTransformComponent>()->SetPosition(
+      CRenderEngine::GetInstance().GetWindowSize() * 0.5f);
+  }
 
   m_sourceData.m_pitch = 1.f;
   m_sourceData.m_gain = 1.f;
-  m_sourceData.m_position[0] = 0.f;
-  m_sourceData.m_position[1] = 0.f;
-  m_sourceData.m_position[2] = 0.f;
-  m_sourceData.m_velocity[0] = 0.f;
-  m_sourceData.m_velocity[1] = 0.f;
-  m_sourceData.m_velocity[2] = 0.f;
   m_sourceData.m_loop = false;
-  SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
+  SSourceData::SetAudioSourceSettings(*m_sourceGameObject->GetComponent<CAudioSourceComponent>()->GetAudioSource(),
+                                      m_sourceData);
 
-  CAudioListener::Init();
-  m_audioSource->Play();
+
+  m_sourceGameObject->GetComponent<CAudioSourceComponent>()->GetAudioSource()->Play();
+  CAudioManager::Get().SetDopplerFactor(0.f);
 
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);
@@ -61,8 +87,6 @@ void CScene::Init()
 void CScene::Shutdown()
 {
   CAudioListener::Shutdown();
-  delete m_audioSource;
-  CAudioBuffer::Destroy(m_audioBuffer);
 }
 
 void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _action)
@@ -71,24 +95,15 @@ void CScene::ReceiveInputPlayer(SInputCode::EKey _key, SInputCode::EAction _acti
   {
     switch (_key)
     {
-    case SInputCode::Up:
-      m_sourceData.m_pitch += DELTA_PITCH;
+    case SInputCode::Up: m_sourceData.m_pitch += DELTA_PITCH;
       break;
-    case SInputCode::Down:
-      m_sourceData.m_pitch -= DELTA_PITCH;
+    case SInputCode::Down: m_sourceData.m_pitch -= DELTA_PITCH;
       break;
-    case SInputCode::Left:
-      m_sourceData.m_position[1] += DELTA_POSITION;
-      break;
-    case SInputCode::Right:
-      m_sourceData.m_position[1] -= DELTA_POSITION;
-      break;
-    case SInputCode::Escape:
-      CRenderEngine::GetInstance().CloseWindow();
+    case SInputCode::Escape: CRenderEngine::GetInstance().CloseWindow();
     }
-    SSourceData::SetAudioSourceSettings(*m_audioSource, m_sourceData);
-    PRINT_LOG("---");
-    PRINT_LOG("Current source pitch:    %.3f", m_sourceData.m_pitch);
-    PRINT_LOG("Current source position: [%.3f, %.3f, %.3f]", m_sourceData.m_position[0], m_sourceData.m_position[1], m_sourceData.m_position[2]);
+    SSourceData::SetAudioSourceSettings(*m_sourceGameObject->GetComponent<CAudioSourceComponent>()->GetAudioSource(),
+                                        m_sourceData);
+    print_log("---");
+    print_log("Current source pitch:    %.3f", m_sourceData.m_pitch);
   }
 }

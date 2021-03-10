@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Component.h"
 #include "litegfx.h"
+#include "RenderComponent.h"
 #include "Vec2.h"
 
-class CSpriteComponent : public CComponent
+class CSpriteComponent : public CRenderComponent
 {
 public:
 
   CSpriteComponent();
 
   virtual void Update(float _deltaTime) override;
-  virtual void Render() const;
+  virtual void Render() const override;
 
   void LoadTexture(const char* _filename, int _horizontalFrames, int _verticalFrames);
   const ltex_t* GetTexture() const;

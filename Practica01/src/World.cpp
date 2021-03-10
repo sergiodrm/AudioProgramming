@@ -9,6 +9,7 @@
 #include "SpriteComponent.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
+#include "RenderComponent.h"
 
 #pragma warning(disable : 4172)
 
@@ -33,10 +34,10 @@ void CWorld::RenderWorld(const Vec2& screenSize) const
   // Render backgrounds
   for (CGameObject* iterator : m_backgrounds)
   {
-    CSpriteComponent* spriteComponent = iterator->GetComponent<CSpriteComponent>();
-    if (spriteComponent != nullptr)
+    CRenderComponent* renderComponent = iterator->GetComponent<CRenderComponent>();
+    if (renderComponent != nullptr)
     {
-      spriteComponent->Render();
+      renderComponent->Render();
     }
   }
 
@@ -47,10 +48,10 @@ void CWorld::RenderWorld(const Vec2& screenSize) const
   // Render game objects (those which can be rendered)
   for (CGameObject* iterator : m_gameObjects)
   {
-    CSpriteComponent* spriteComponent = iterator->GetComponent<CSpriteComponent>();
-    if (spriteComponent != nullptr)
+    CRenderComponent* renderComponent = iterator->GetComponent<CRenderComponent>();
+    if (renderComponent != nullptr)
     {
-      spriteComponent->Render();
+      renderComponent->Render();
     }
   }
 }
@@ -59,7 +60,7 @@ void CWorld::AddGameObject(CGameObject* _gameObject)
 {
   ensure(_gameObject != nullptr);
   m_gameObjects.push_back(_gameObject);
-  PRINT_LOG("Total game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
+  print_log("Total game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
 }
 
 void CWorld::RemoveGameObject(CGameObject* _gameObject)
@@ -79,7 +80,7 @@ void CWorld::AddBackground(CGameObject* _background)
 {
   ensure(_background != nullptr);
   m_backgrounds.push_back(_background);
-  PRINT_LOG("Total game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
+  print_log("Total game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
 }
 
 void CWorld::RemoveBackground(CGameObject* _background)
@@ -111,7 +112,7 @@ const Vec2& CWorld::GetCurrentCameraPosition() const
 
 void CWorld::Clear()
 {
-  PRINT_LOG("Removing game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
+  print_log("Removing game objects in memory: %d", m_gameObjects.size() + m_backgrounds.size());
   for (CGameObject* iterator : m_backgrounds)
   {
     CGameObject::Destroy(iterator);

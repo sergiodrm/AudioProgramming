@@ -7,6 +7,7 @@
 #include "RigidBodyComponent.h"
 #include "TransformComponent.h"
 #include "Collider.h"
+#include "TimeManager.h"
 
 CMovementComponent::CMovementComponent()
   : m_movementInput(0.f, 0.f), m_speed(150.f), m_bProcessingInput(true)
@@ -25,10 +26,18 @@ void CMovementComponent::Update(float _deltaTime)
     CTransformComponent* transformComponent = GetOwner()->GetComponent<CTransformComponent>();
     CRigidBodyComponent* rigidBodyComponent = GetOwner()->GetComponent<CRigidBodyComponent>();
     Vec2 updatedPosition = transformComponent->GetPosition() + m_movementInput * _deltaTime;
-    if (rigidBodyComponent != nullptr && !rigidBodyComponent->CheckAvailablePosition(updatedPosition))
+    m_lastFramePosition = transformComponent->GetPosition();
+    if (rigidBodyComponent && rigidBodyComponent->IsPhysicsActived())
+    {
+      if (!rigidBodyComponent->CheckAvailablePosition(updatedPosition))
+      {
+        transformComponent->SetPosition(updatedPosition);
+        rigidBodyComponent->GetCollider()->SetPosition(updatedPosition);
+      }
+    }
+    else
     {
       transformComponent->SetPosition(updatedPosition);
-      rigidBodyComponent->GetCollider()->SetPosition(updatedPosition);
     }
   }
 }
@@ -53,19 +62,50 @@ void CMovementComponent::ProcessInput(SInputCode::EKey _key, SInputCode::EAction
   {
     if (_key == SInputCode::EKey::A || _key == SInputCode::EKey::Left)
     {
-      m_movementInput.SetX(_action == SInputCode::EAction::Press || _action == SInputCode::EAction::Maintain ? -m_speed : 0.f);
+      m_movementInput.SetX(_action == SInputCode::EAction::Press || _action == SInputCode::EAction::Maintain
+                             ? -m_speed
+                             : 0.f);
     }
     else if (_key == SInputCode::D || _key == SInputCode::EKey::Right)
     {
-      m_movementInput.SetX(_action == SInputCode::EAction::Press || _action == SInputCode::EAction::Maintain ? m_speed : 0.f);
+      m_movementInput.SetX(_action == SInputCode::EAction::Press || _action == SInputCode::EAction::Maintain
+                             ? m_speed
+                             : 0.f);
     }
-    else if ((_key == SInputCode::Space || _key == SInputCode::Up || _key == SInputCode::W) && _action == SInputCode::EAction::Press)
+      //else if (_key == SInputCode::Up || _key == SInputCode::W)
+      //{
+      //  m_movementInput.SetY(_action == SInputCode::Press || _action == SInputCode::Maintain ? -m_speed : 0.f);
+      //}
+      //else if (_key == SInputCode::Down || _key == SInputCode::S)
+      //{
+      //  m_movementInput.SetY(_action == SInputCode::Press || _action == SInputCode::Maintain ? m_speed : 0.f);
+      //}
+    else if ((_key == SInputCode::Space || _key == SInputCode::Up || _key == SInputCode::W) && _action ==
+      SInputCode::EAction::Press)
     {
-      Jump();
+      //Jump();
     }
     else if (_key == SInputCode::Escape)
     {
       CRenderEngine::GetInstance().CloseWindow();
     }
   }
+}
+
+const Vec2& CMovementComponent::GetMovementDirection() const
+{
+  return m_movementInput;
+}
+
+float CMovementComponent::GetSpeed() const
+{
+  return m_speed;
+}
+
+Vec2 CMovementComponent::GetLastFrameVelocity() const
+{
+  Vec2 position = GetOwner()->GetComponent<CTransformComponent>()->GetPosition();
+  Vec2 deltaPosition = position - m_lastFramePosition;
+  Vec2 lastFrameVelocity = deltaPosition / static_cast<float>(CTimeManager::GetTimer().GetFixedTick());
+  return lastFrameVelocity;
 }

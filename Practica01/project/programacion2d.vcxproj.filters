@@ -51,7 +51,6 @@
     <ClCompile Include="..\src\TimeManager.cpp">
       <Filter>Engine\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\GameObject.cpp">
       <Filter>Engine\GameObjects</Filter>
     </ClCompile>
@@ -123,6 +122,16 @@
     </ClCompile>
     <ClCompile Include="..\src\AudioListener.cpp">
       <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Practica02\src\AudioListenerComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Practica02\src\AudioSourceComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\BasicShapeComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +248,15 @@
     </ClInclude>
     <ClInclude Include="..\src\AudioListener.h">
       <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Practica02\src\AudioSourceComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Practica02\src\AudioListenerComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BasicShapeComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

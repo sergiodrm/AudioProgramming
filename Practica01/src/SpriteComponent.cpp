@@ -208,5 +208,5 @@ void CSpriteComponent::Render() const
     // Draw the sprite
     CRenderEngine::RenderImage(imageData);
   }
-  else PRINT_WARNING("Sprite no inicializado");
+  else print_warning("Sprite no inicializado");
 }

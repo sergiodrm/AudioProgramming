@@ -18,7 +18,6 @@ void CAudioSourceComponent::Update(float _deltaTime)
     {
       Vec2 position = transformComponent->GetPosition();
       m_audioSource->SetPosition(position.GetX(), position.GetY(), 0.f);
-      //print_log("Audio source position: [%.0f, %.0f]", position.GetX(), position.GetY());
     }
 
     // Update velocity from movement component
@@ -27,7 +26,6 @@ void CAudioSourceComponent::Update(float _deltaTime)
     {
       Vec2 velocity = movementComponent->GetLastFrameVelocity();
       m_audioSource->SetVelocity(velocity.GetX(), velocity.GetY(), 0.f);
-      //print_log("Audio source velocity: [%.0f, %.0f]", velocity.GetX(), velocity.GetY());
     }
   }
 }
