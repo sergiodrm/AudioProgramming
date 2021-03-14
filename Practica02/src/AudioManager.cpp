@@ -169,13 +169,6 @@ CAudioManager::SWavData* CAudioManager::LoadWavFile(const char* _filename)
     // Now read the amount of bytes of specified on extraParamsSize.
     // @todo check change from jump with fread to jump with fseek
     fseek(fid, extraParamsSize, SEEK_CUR);
-    /*if (extraParamsSize > 0)
-    {
-      char* extraParams = new char[extraParamsSize];
-      bytesRead = fread(extraParams, 1, static_cast<size_t>(extraParamsSize), fid);
-      ensure(bytesRead > 0);
-      delete[] extraParams;
-    }*/
   }
 
   // Find "data" string in file from here

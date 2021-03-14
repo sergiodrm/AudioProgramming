@@ -17,8 +17,8 @@ CAudioSource::CAudioSource(CAudioBuffer* _audioBuffer)
   al_call(alSource3f(m_audioSourceBuffer, AL_VELOCITY, 0.f, 0.f, 0.f));
 
   // Volume configuration
-  al_call(alSourcef(m_audioSourceBuffer, AL_MAX_DISTANCE, 200.f));
-  al_call(alSourcef(m_audioSourceBuffer, AL_REFERENCE_DISTANCE, 100.f));
+  al_call(alSourcef(m_audioSourceBuffer, AL_MAX_DISTANCE, 100.f));
+  al_call(alSourcef(m_audioSourceBuffer, AL_REFERENCE_DISTANCE, 15.f));
 
   // Bind input buffer
   al_call(alSourcei(m_audioSourceBuffer, AL_BUFFER, _audioBuffer->GetALBuffer()));

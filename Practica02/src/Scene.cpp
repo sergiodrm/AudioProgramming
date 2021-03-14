@@ -64,22 +64,22 @@ void CScene::Init()
   {
     // Init audio source game object
     CGameObject* sourceGameObject = CGameObject::Create();
-    CAudioSourceComponent* audioSourceComponent = sourceGameObject->AddComponent<CAudioSourceComponent>();
-    audioSourceComponent->LoadAudio(AUDIO_ENGINE);
     CBasicShapeComponent* shapeComponent = sourceGameObject->AddComponent<CBasicShapeComponent>();
     shapeComponent->SetColor(0.5f, 0.1f, 0.1f, 1.f);
     shapeComponent->SetSize(Vec2(20.f, 20.f));
-    audioSourceComponent->GetAudioSource()->SetLooping(true);
     CCircleMovementComponent* circleMovementComponent = sourceGameObject->AddComponent<CCircleMovementComponent>();
     circleMovementComponent->SetCenter(CRenderEngine::GetInstance().GetWindowSize() / 2.f);
     circleMovementComponent->SetRadius(CRenderEngine::GetInstance().GetWindowSize().GetY() / 4.f);
+    CAudioSourceComponent* audioSourceComponent = sourceGameObject->AddComponent<CAudioSourceComponent>();
+    audioSourceComponent->LoadAudio(AUDIO_ENGINE);
+    audioSourceComponent->GetAudioSource()->SetLooping(true);
     sourceGameObject->Active();
 
-    CAudioManager::Get().SetDopplerFactor(2.f);
-    CAudioManager::Get().SetDopplerVelocity(DOPPLER_SPEED);
     audioSourceComponent->GetAudioSource()->Play();
   }
 
+  CAudioManager::Get().SetDopplerFactor(3.f);
+  CAudioManager::Get().SetDopplerVelocity(DOPPLER_SPEED);
   // Bind method to receive input from player
   CInputManager::GetInstance().BindKeyboardCallback<CScene, &CScene::ReceiveInputPlayer>(this);
 }

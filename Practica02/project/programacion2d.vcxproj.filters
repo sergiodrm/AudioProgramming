@@ -136,7 +136,9 @@
     <ClCompile Include="..\src\BasicShapeComponent.cpp">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\CircleMovementComponent.cpp" />
+    <ClCompile Include="..\src\CircleMovementComponent.cpp">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\litegfx.h">
@@ -265,6 +267,8 @@
     <ClInclude Include="..\src\BasicShapeComponent.h">
       <Filter>Engine\GameObjects\Components\Derived</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\CircleMovementComponent.h" />
+    <ClInclude Include="..\src\CircleMovementComponent.h">
+      <Filter>Engine\GameObjects\Components\Derived</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
